@@ -77,10 +77,6 @@ public class hash {
         size++;
     }
     public void remove(String name){
-        if(isEmpty()==true){
-            System.out.println("The contacts list is empty.");
-            return;
-        }
         int index=(int)hash_calc(name);
         int i=0;
         boolean found=false;
@@ -130,14 +126,12 @@ public class hash {
                 return;
             }
             index= (int) ((index + i*i) % capacity);
+            i++;
         }
         
     }
     void display(){
-        if(isEmpty()==true){
-            System.out.println("Contacts are empty");
-            return;
-        }
+        
         System.out.println("----------------------------------");
         for(int i=0; i<capacity; i++){
             try{
