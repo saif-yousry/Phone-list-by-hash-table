@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Hash_phonelist {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        hash list = new hash(1009);
+        hash list = new hash(5);
         String name, phone;
         while (true) {
             int choice;
@@ -31,6 +31,7 @@ public class Hash_phonelist {
                     System.out.println("Enter a phone: ");
                     phone = input.next();
                     list.insert(name, phone);
+                    System.out.println("The contact is added successfully.");
                     break;
                 case 2:
                     if(list.isEmpty()){
