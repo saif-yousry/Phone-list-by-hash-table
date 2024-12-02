@@ -64,7 +64,7 @@ public class hash {
         if (isFull() || (double) size / capacity > 0.7) { 
             rehash();
         }
-        if (search(name)) {
+        if (search(name)!=-1) {
             System.out.println("The contact already exists");
             return;
         }
@@ -80,28 +80,20 @@ public class hash {
     }
 
     public void remove(String name) {
-        int index = (int) hash_calc(name);
+        int index = search(name);
         int i = 0;
 
-        if (!search(name)) {
+        if (index==-1) {
             System.out.println("The contact with name " + name + " doesn't exist.");
             return;
         }
-
-        while (Contacts[index] != null && Contacts[index].node != null) {
-            if (Contacts[index].node.name.equalsIgnoreCase(name) && Contacts[index].occupiedBefore) {
-                Contacts[index].node = null;
-                Contacts[index].occupiedBefore = false;
-                System.out.println("The contact with name " + name + " is removed successfully.");
-                size--;
-                break;
-            }
-            index = (index + i * i) % capacity;
-            i++;
-        }
+        Contacts[index].node=null;
+        Contacts[index].occupiedBefore=false;
+        size--;
+        System.out.println("The contact is removed successfuly.");
     }
 
-    public boolean search(String name) {
+    public int search(String name) {
         int index = (int) hash_calc(name);
         int i = 0;
 
@@ -109,28 +101,18 @@ public class hash {
             if (Contacts[index].node.name.equalsIgnoreCase(name) && Contacts[index].occupiedBefore) {
                 System.out.println("Found at index: " + index);
                 System.out.println("Phone: " + Contacts[index].node.phone);
-                return true;
+                return index;
             }
             index = (index + i * i) % capacity;
             i++;
         }
-        return false;
+        return -1;
     }
 
-    public void update(String name, String newPhone) {
-        int index = (int) hash_calc(name);
-        int i = 0;
-
-        while (Contacts[index] != null && Contacts[index].node != null) {
-            if (Contacts[index].node.name.equalsIgnoreCase(name) && Contacts[index].occupiedBefore) {
-                String oldPhone = Contacts[index].node.phone;
-                Contacts[index].node.phone = newPhone;
-                System.out.println("Contact updated from " + oldPhone + " to " + newPhone);
-                return;
-            }
-            index = (index + i * i) % capacity;
-            i++;
-        }
+    public void update(int index, String newPhone) {
+        String old=Contacts[index].node.phone;
+        Contacts[index].node.phone=newPhone;
+        System.out.println("The contact's number updaed successfuly from "+old+" to "+newPhone+".");
     }
 
     void display() {
