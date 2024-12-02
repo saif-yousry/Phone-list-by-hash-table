@@ -6,7 +6,6 @@ public class Hash_phonelist {
         Scanner input = new Scanner(System.in);
         hash list = new hash(1009);
         String name, phone;
-        
         while (true) {
             int choice;
             System.out.println("""
@@ -27,7 +26,7 @@ public class Hash_phonelist {
             }
             switch (choice) {
                 case 1:
-                    System.out.println("\nEnter a name: ");
+                    System.out.println("Enter a name: ");
                     name = input.next();
                     System.out.println("Enter a phone: ");
                     phone = input.next();
@@ -35,13 +34,13 @@ public class Hash_phonelist {
                     break;
                 case 2:
                     if(list.isEmpty()){
-                        System.out.println("\nThe list is empty.");
+                        System.out.println("The list is empty.");
                         break;
                     }
-                    System.out.println("\nEnter the name for search:");
+                    System.out.println("Enter the name for search:");
                     name = input.next();
-                    if(!list.search(name))
-                        System.out.println("\nThe contact doesn't exist.");
+                    if(list.search(name)==-1)
+                        System.out.println("The contact doesn't exist.");
                     break;
                 case 3:
                     if (list.isEmpty()){
@@ -59,13 +58,14 @@ public class Hash_phonelist {
                     }
                     System.out.println("Enter the name to update:");
                     name = input.next();
-                    if(!list.search(name)){
+                    int index=list.search(name);
+                    if(index==-1){
                         System.out.println("The contact doesn't exist.");
                         break;
                     }
                     System.out.println("Enter the updated phone number");
                     phone = input.next();
-                    list.update(name, phone);
+                    list.update(index, phone);
                     break;
                 case 5:
                     if (list.isEmpty()){
@@ -74,13 +74,9 @@ public class Hash_phonelist {
                     }
                     list.display();
                     break;
-                
                 case 6:
                     return;
-                
             }
-
         }
     }
-    
 }
