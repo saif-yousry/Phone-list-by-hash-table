@@ -64,9 +64,8 @@ public class hash {
         if (isFull() || (double) size / capacity > 0.7) { 
             rehash();
         }
-        int if_exist=search(name);
-        if (if_exist!=-1) {
-            System.out.println("The contact already exists at index "+if_exist+".");
+        if (search(name)!=-1) {
+            System.out.println("The contact already exists");
             return;
         }
         int index = (int) hash_calc(name);
@@ -76,7 +75,7 @@ public class hash {
             i++;
         }
         Contacts[index] = new HashNode(name, phone);
-        System.out.println("The contact is added successfully.");
+        
         size++;
     }
 
@@ -97,7 +96,7 @@ public class hash {
     public int search(String name) {
         int index = (int) hash_calc(name);
         int i = 0;
-
+        
         while (Contacts[index] != null && Contacts[index].node != null) {
             if (Contacts[index].node.name.equalsIgnoreCase(name) && Contacts[index].occupiedBefore) {
                 System.out.println("Found at index: " + index);
