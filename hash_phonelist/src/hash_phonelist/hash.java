@@ -64,8 +64,9 @@ public class hash {
         if (isFull() || (double) size / capacity > 0.7) { 
             rehash();
         }
-        if (search(name)!=-1) {
-            System.out.println("The contact already exists");
+        int if_exist=search(name);
+        if (if_exist!=-1) {
+            System.out.println("The contact already exists at index "+if_exist+".");
             return;
         }
         int index = (int) hash_calc(name);
@@ -81,7 +82,7 @@ public class hash {
 
     public void remove(String name) {
         int index = search(name);
-        int i = 0;
+        
 
         if (index==-1) {
             System.out.println("The contact with name " + name + " doesn't exist.");
